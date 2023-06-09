@@ -24,6 +24,7 @@ Route::controller(ShopesController::class)->group(function () {
     Route::post('/shop/update', 'update');
     Route::get('/shop/show', 'show');
     Route::post('/shop/delete', 'delete');
+    Route::post('/shop/store', 'store');
 });
 
 Route::controller(RequestsController::class)->group(function () {

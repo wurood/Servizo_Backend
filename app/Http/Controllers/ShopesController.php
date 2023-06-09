@@ -94,4 +94,27 @@ class ShopesController extends Controller
         }
         return response(['message' => "Shope Deleted Successfully", 'data' => $isDeleted], 200);
     }
+
+    public function store(Request $request)
+    {
+        $dataReq = $request->all();
+        $folder_name=$dataReq['companyName'];
+        $request->validate(['images.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',]);
+        try{
+            $paths = [];
+
+        // if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            $filename = $images->getClientOriginalName();
+            $path = $images->storeAs("public/$folder_name", $filename);
+
+
+        // }
+    } catch (Exception $e) {
+            return response(['status' => false, 'message' => $e], 400);
+            }
+
+            return response()->json(['message' => "Images added Successfully"], 200);
+        }
 }
